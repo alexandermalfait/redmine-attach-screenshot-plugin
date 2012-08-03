@@ -30,6 +30,14 @@ class AttachScreenshotController < ApplicationController
     end
   end
 
+  def find_current_user
+    if request.post? && params[:key].present?
+      User.find_by_rss_key(params[:key])
+    else
+      super
+    end
+  end
+
   private
 
   def make_tmpname(date, name = "screenshot.png")
